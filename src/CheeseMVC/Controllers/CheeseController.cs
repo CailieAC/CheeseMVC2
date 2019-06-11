@@ -66,5 +66,33 @@ namespace CheeseMVC.Controllers
 
             return Redirect("/");
         }
+
+        [HttpGet]
+        public IActionResult Edit(int cheeseId)
+        {
+            EditCheeseViewModel editCheeseViewModel = new EditCheeseViewModel();
+            return View(editCheeseViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EditCheeseViewModel editCheeseViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                // Add the new cheese to my existing cheeses
+                Cheese editCheese = new Cheese()
+                {
+                    Name = editCheeseViewModel.Name,
+                    Description = editCheeseViewModel.Description,
+                    Type = editCheeseViewModel.Type
+                };
+
+                CheeseData.Add(editCheese);
+
+                return Redirect("/Cheese");
+            }
+            //now the viewmodel might contain data
+            return View(editCheeseViewModel);
+        }
     }
 }

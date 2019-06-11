@@ -17,11 +17,12 @@
 
     @foreach (var cheese in Model)
     {
-        <tr>
-            <td>@cheese.Name</td>
-            <td>@cheese.Description</td>
-            <td>@cheese.Type</td>
-        </tr>
+    <tr>
+        <td>@cheese.Name</td>
+        <td>@cheese.Description</td>
+        <td>@cheese.Type</td>
+        <td><a asp-controller="Cheese" asp-action="Edit" asp-route-cheeseId="@cheese.CheeseId">Edit</a></td>
+    </tr>
     }
 </table>
 
