@@ -34,6 +34,12 @@ namespace CheeseMVC.Models
             return cheeses.Single(x => x.CheeseId == id);
         }
 
+        //Edit
+        public static void Update(Cheese cheese)
+        {
+            Remove(cheese.CheeseId);
+            cheeses.Add(cheese);
+        }
 
     }
 }

@@ -71,6 +71,13 @@ namespace CheeseMVC.Controllers
         public IActionResult Edit(int cheeseId)
         {
             EditCheeseViewModel editCheeseViewModel = new EditCheeseViewModel();
+            editCheeseViewModel.cheeseId =cheeseId;
+            editCheeseViewModel.Persist(cheeseId);
+            /*Not sure about this:
+            Cheese editedCheese = new Cheese();
+            editCheeseViewModel.cheeseId = cheeseId;
+            */
+
             return View(editCheeseViewModel);
         }
 
@@ -79,6 +86,10 @@ namespace CheeseMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                editCheeseViewModel.Persist(editCheeseViewModel.cheeseId);
+                return RedirectToAction(actionName: nameof(Index));
+
+                /*
                 // Add the new cheese to my existing cheeses
                 Cheese editCheese = new Cheese()
                 {
@@ -90,6 +101,7 @@ namespace CheeseMVC.Controllers
                 CheeseData.Add(editCheese);
 
                 return Redirect("/Cheese");
+                */
             }
             //now the viewmodel might contain data
             return View(editCheeseViewModel);

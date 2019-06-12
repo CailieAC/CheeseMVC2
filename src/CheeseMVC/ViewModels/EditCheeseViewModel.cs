@@ -10,6 +10,17 @@ namespace CheeseMVC.ViewModels
     public class EditCheeseViewModel: AddCheeseViewModel
     {
         public int cheeseId { get; set; }
-        
+
+        public void Persist(int id)
+        {
+            Cheese cheese = new Cheese
+            {
+                CheeseId = id,
+                Name = this.Name,
+                Description = this.Description,
+                Type = this.Type,
+            };
+            CheeseData.Update(cheese);
+        }
     }
 }
