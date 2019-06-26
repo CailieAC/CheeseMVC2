@@ -2,16 +2,24 @@
 using CheeseMVC.Models;
 using System.Collections.Generic;
 using CheeseMVC.ViewModels;
+using CheeseMVC.Data;
+using System.Linq;
 
 namespace CheeseMVC.Controllers
 {
     public class CheeseController : Controller
     {
+        private CheeseDbContext context;
+        public CheeseController(CheeseDbContext dbContext)
+        {
+            context = dbContext;
+        }
 
         // GET: /<controller>/
         public IActionResult Index()
         {
-            List<Cheese> cheeses = CheeseData.GetAll();
+            //List<Cheese> cheeses = CheeseData.GetAll();
+            List<Cheese> cheeses = context.Cheeses.ToList();
 
             return View(cheeses);
         }
@@ -35,7 +43,8 @@ namespace CheeseMVC.Controllers
                     Type = addCheeseViewModel.Type
                 };
 
-                CheeseData.Add(newCheese);
+                context.Cheeses.Add(newCheese);
+                context.SaveChanges();
 
                 return Redirect("/Cheese");
             }
