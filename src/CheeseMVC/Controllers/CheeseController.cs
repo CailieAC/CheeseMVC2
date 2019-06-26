@@ -71,7 +71,7 @@ namespace CheeseMVC.Controllers
         public IActionResult Edit(int cheeseId)
         {
             EditCheeseViewModel editCheeseViewModel = new EditCheeseViewModel();
-            editCheeseViewModel.cheeseId =cheeseId;
+            editCheeseViewModel.cheeseId = cheeseId;
             editCheeseViewModel.Persist(cheeseId);
             /*Not sure about this:
             Cheese editedCheese = new Cheese();
